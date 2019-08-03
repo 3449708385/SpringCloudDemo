@@ -28,7 +28,7 @@ public class MyZuullFilter extends ZuulFilter {
         RequestContext requestContext= RequestContext.getCurrentContext();
         System.out.println("filter");
         System.out.println(requestContext.getRequest().getMethod());
-        //requestContext.setSendZuulResponse(true);
+        //requestContext.setSendZuulResponse(true);//默认为true
         //requestContext.setResponseStatusCode(200);
         return null;
     }

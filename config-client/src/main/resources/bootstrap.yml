@@ -1,11 +1,25 @@
+#接下来这步骤很关键，就是要将Client模块下的application.yml文件改为bootstrap.yml,这是很关键的，
+#因为bootstrap.yml是比application.yml先加载的。bootstrap.yml优先级高于application.yml。
 server:
-  port: 8081
-  #servlet:
-   # context-path: /demo-customer  #默认没有项目名，你可以加
+  port: 7005
 spring:
   application:
-    name: demo-customer
+    #name: config-client
+    name: cloud-config  # cloud-config-dev.properties,对应我github配置文件的文件名
+  cloud:
+    config:
+      #启动什么环境下的配置，dev 表示开发环境，这跟你仓库的文件的后缀有关，比如，仓库配置文件命名格式是cloud-config-dev.properties,所以profile 就要写dev
+      profile: dev
+      #面向服务，允许被发现
+      #discovery:
+       # enabled: true
+        #这个名字是Config Server端的服务名字，不能瞎写。
+        #service-id: config-server  #我测试发现无法使用，好像要1.4.3的springboot版本才行
+      #label: master
+      uri: http://localhost:7000
 
+
+#注册中心
 eureka:
   server:
     # 测试时关闭自我保护机制，保证不可用服务及时踢出
@@ -39,6 +53,13 @@ eureka:
          # enabled: true
 
 
-feign:
-  hystrix:
-    enabled: true
+#是否需要权限拉去，默认是true,如果不false就不允许你去拉取配置中心Server更新的内容
+#post请求刷新：http://localhost:7005/actuator/refresh
+# 这个是走zuul路由的地址刷新：http://localhost:9001/config/actuator/refresh
+management:
+  security:
+    enabled: false
+  endpoints:
+      web:
+        exposure:
+          include: refresh,health
