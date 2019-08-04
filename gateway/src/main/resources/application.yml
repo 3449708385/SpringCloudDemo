@@ -86,6 +86,11 @@ zuul:
         refresh-interval: 60
         # 限流方式 USER 根据用户；ORIGIN 原始请求；URL 请求地址；
         type: ORIGIN
+  #Turbine 配置
+  #ribbonIsolationStrategy: THREAD #设置Hystrix隔离策略为线程池
+  #threadPool:
+   # useSeparateThreadPools: true #每个路由使用独立的线程池
+
 server:
   port: 9001    # 端口号
 

@@ -12,6 +12,11 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableZuulProxy  //服务网关
 public class GatewayApplication {
 
+    /**
+     * http://localhost:9001/config/config/getConfig
+     * http://localhost:9001/customer/test
+     * @param args
+     */
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
     }

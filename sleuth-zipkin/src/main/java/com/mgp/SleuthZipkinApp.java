@@ -16,6 +16,9 @@ import zipkin.server.internal.EnableZipkinServer;
 @EnableEurekaClient
 public class SleuthZipkinApp {
 
+    /**
+     * http://localhost:7001/zipkin/
+     */
     public static void main(String[] args) {
         SpringApplication.run(SleuthZipkinApp.class, args);
     }

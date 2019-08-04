@@ -19,6 +19,7 @@
         <module>config-server</module>
         <module>config-client</module>
         <module>sleuth-zipkin</module>
+        <module>turbine</module>
     </modules>
 
 </project>

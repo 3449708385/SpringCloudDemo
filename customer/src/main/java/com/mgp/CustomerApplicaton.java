@@ -27,6 +27,10 @@ public class CustomerApplicaton {
         return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
     }
 
+    /**
+     * http://localhost:8081/test
+     * @param args
+     */
     public static void main(String[] args) {
         SpringApplication.run(CustomerApplicaton.class, args);
     }
