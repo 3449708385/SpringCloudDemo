@@ -13,9 +13,13 @@ spring:
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
+  #sleuth-zipkin
   zipkin:
     enabled: true
-    base-url: http://zipkin-dashboard/
+    base-url: http://localhost:7001
+  sleuth:
+    sampler:
+      percentage: 1.0  #默认的采样比例为: 0.1(即10%),所设置的值介于0.0到1.0之间
 
  #redis
 # REDIS (RedisProperties)

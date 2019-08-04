@@ -39,11 +39,17 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <!-- bus-RabbitMQ -->
+        <!-- bus-RabbitMQ 用于多客户端刷新配置信息，避免一个一个访问刷新，也可以用Kafka替换rabbitmq -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
+        <!-- sleuth-zipkin 链路追踪 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        <!-- sleuth-zipkin 链路追踪 final -->
     </dependencies>
 
     <dependencyManagement>

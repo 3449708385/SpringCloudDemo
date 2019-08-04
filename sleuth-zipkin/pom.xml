@@ -2,11 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <groupId>com.mgp</groupId>
-    <artifactId>config-server</artifactId>
+    <artifactId>sleuth-zipkin</artifactId>
     <version>1.0.0</version>
-    <name>config-server</name>
-    <description>config-server</description>
+    <name>sleuth-zipkin</name>
+    <description>链路追踪</description>
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -23,26 +24,23 @@
     </properties>
 
     <dependencies>
+        <!-- 引入zipkin-server依赖，提供server端功能 -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
+            <groupId>io.zipkin.java</groupId>
+            <artifactId>zipkin-server</artifactId>
+            <version>2.8.0</version>
         </dependency>
+        <!-- 引入zipkin-autoconfigure-ui依赖，用来提供zipkin web ui组件的功能，方便查看相关信息 -->
+        <dependency>
+            <groupId>io.zipkin.java</groupId>
+            <artifactId>zipkin-autoconfigure-ui</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <!-- 引入eureka依赖 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-netflix-eureka-client</artifactId>
         </dependency>
-        <!-- bus-RabbitMQ 用于多客户端刷新配置信息，避免一个一个访问刷新，也可以用Kafka替换rabbitmq -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
-        </dependency>
-        <!-- bus-RabbitMQ 用于多客户端刷新配置信息，避免一个一个访问刷新，也可以用Kafka替换rabbitmq final -->
-        <!-- sleuth-zipkin 链路追踪 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
-        </dependency>
-        <!-- sleuth-zipkin 链路追踪 final -->
     </dependencies>
 
     <dependencyManagement>
@@ -65,6 +63,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

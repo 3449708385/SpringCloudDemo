@@ -65,6 +65,12 @@
             <artifactId>hystrix-javanica</artifactId>
         </dependency>
         <!-- spring cloud 负载均衡访问 final -->
+        <!-- sleuth-zipkin 链路追踪 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        <!-- sleuth-zipkin 链路追踪 final -->
     </dependencies>
 
 

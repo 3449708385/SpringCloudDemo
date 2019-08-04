@@ -36,6 +36,14 @@ spring:
         max-concurrency: 10   #最大消费者数量
         retry:
           enabled: true  #是否支持重试
+
+  #sleuth-zipkin
+  zipkin:
+    base-url: http://localhost:7001
+  sleuth:
+    sampler:
+      percentage: 1.0
+
 management:
   health:
     rabbit:

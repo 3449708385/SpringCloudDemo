@@ -33,6 +33,12 @@ spring:
         retry:
           enabled: true  #是否支持重试
 
+  #sleuth-zipkin
+  zipkin:
+    base-url: http://localhost:7001
+  sleuth:
+    sampler:
+      percentage: 1.0
 
 #注册中心
 eureka:
