@@ -8,8 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DemoController {
+
+    /**
+     * feign调用方式
+     */
     @Autowired
     public DemoFeignService demoFeignService;
+
+    /**
+     * rest http 调用方式
+     */
+    /*@Autowired
+    public DemoApiService demoFeignService;*/
 
     @RequestMapping("/test")
     public String test() {

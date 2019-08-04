@@ -75,7 +75,7 @@ zuul:
       # 指定限流服务
       test-service:
         # 每个周期内请求次数
-        limit: 3
+        limit: 30
         # 单位时间内允许访问的总时间
         quota: 30
         # 周期时间
