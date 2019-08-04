@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <modelVersion>4.0.0</modelVersion>
     <name>provider</name>
-    <description>服务提供者 eureka client </description>
+    <description>服务器内部，feign服务提供者 eureka client </description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

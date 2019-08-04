@@ -8,7 +8,7 @@
     <artifactId>customer</artifactId>
     <version>1.0.0</version>
     <name>customer</name>
-    <description>customer 搭建消费者</description>
+    <description>接口开放服务，对外提供访问</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
