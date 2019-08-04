@@ -43,6 +43,7 @@ management:
   security:
     enabled: false
 #暴露端点
+# post请求刷新配置文件：http://localhost:7000/actuator/bus-refresh
   endpoints:
     web:
       exposure:
