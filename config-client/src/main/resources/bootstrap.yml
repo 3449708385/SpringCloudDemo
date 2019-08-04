@@ -17,6 +17,21 @@ spring:
         #service-id: config-server  #我测试发现无法使用，好像要1.4.3的springboot版本才行
       #label: master
       uri: http://localhost:7000
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    publisher-confirms: true   #消息发送到交换机确认机制，是否确认回调
+    virtual-host: /
+    publisher-returns: true   #消息发送到交换机确认机制，是否返回回调
+    listener:
+      simple:
+        acknowledge-mode: manual   #采用手动应答
+        concurrency: 1   #最小消费者数量
+        max-concurrency: 10   #最大消费者数量
+        retry:
+          enabled: true  #是否支持重试
 
 
 #注册中心
@@ -53,6 +68,9 @@ eureka:
          # enabled: true
 
 
+
+
+
 #是否需要权限拉去，默认是true,如果不false就不允许你去拉取配置中心Server更新的内容
 #post请求刷新：http://localhost:7005/actuator/refresh
 # 这个是走zuul路由的地址刷新：http://localhost:9001/config/actuator/refresh
@@ -63,3 +81,6 @@ management:
       web:
         exposure:
           include: refresh,health
+  health:
+    rabbit:
+      enabled: false

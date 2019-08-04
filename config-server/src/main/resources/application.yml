@@ -21,6 +21,33 @@ spring:
         retry:
            max-attempts: 3  #重试次数
 
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    publisher-confirms: true   #消息发送到交换机确认机制，是否确认回调
+    virtual-host: /
+    publisher-returns: true   #消息发送到交换机确认机制，是否返回回调
+    listener:
+      simple:
+        acknowledge-mode: manual   #采用手动应答
+        concurrency: 1   #最小消费者数量
+        max-concurrency: 10   #最大消费者数量
+        retry:
+          enabled: true  #是否支持重试
+management:
+  health:
+    rabbit:
+      enabled: false
+  security:
+    enabled: false
+#暴露端点
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+
 #加入注册中心，实现高可用
 eureka:
   server:
