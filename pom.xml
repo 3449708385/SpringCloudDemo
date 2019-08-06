@@ -20,6 +20,7 @@
         <module>config-client</module>
         <module>sleuth-zipkin</module>
         <module>turbine</module>
+        <module>archaius</module>
     </modules>
 
 </project>
