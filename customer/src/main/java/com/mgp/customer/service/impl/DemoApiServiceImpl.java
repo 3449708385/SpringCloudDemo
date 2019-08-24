@@ -5,16 +5,25 @@ import com.mgp.customer.service.DemoApiService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Collections;
 
 @Service("demoApiService")
 public class DemoApiServiceImpl implements DemoApiService {
 
     @Autowired(required = false)@Qualifier("restTemplate")
     private RestTemplate restTemplate;
+
+    @Autowired(required = false)@Qualifier("myHeaders")
+    private HttpHeaders myHeaders;
 
     /**
      * 入参为字段，返回值为字段
@@ -35,7 +44,20 @@ public class DemoApiServiceImpl implements DemoApiService {
     public String test(String test) {
         String serverName = "demo-provider";  //再框架里面可以访问，外面不行
         String url = "http://"+serverName+"/demo-api/test?test="+test;
-        return restTemplate.getForObject(url, String.class);//这是服务间相互调用
+        return this.restTemplate.exchange(url, HttpMethod.GET,new HttpEntity<Object>(this.myHeaders), String.class).getBody();
+       // return restTemplate.getForObject(url, String.class);//这是服务间相互调用，没有加安全框架的时候使用
+
+        // header填充,另一种请求方式，还未验证
+       /*
+        // 获取单例RestTemplate
+        RestTemplate restTemplate = HttpInvoker.getRestTemplate();
+        HttpEntity request = new HttpEntity(this.myHeaders);
+        // 构造execute()执行所需要的参数。
+        RequestCallback requestCallback = restTemplate.httpEntityCallback(request, String.class);
+        ResponseExtractor<ResponseEntity<String>> responseExtractor = restTemplate.responseEntityExtractor(String.class);
+        // 执行execute()，发送请求
+        ResponseEntity<JSONObject> response = restTemplate.execute(url, HttpMethod.GET, requestCallback, responseExtractor);
+*/
     }
 
     /**
@@ -50,7 +72,11 @@ public class DemoApiServiceImpl implements DemoApiService {
         paramMap.add("user", user);
         String serverName = "demo-provider";  //再框架里面可以访问，外面不行
         String url = "http://"+serverName+"/demo-api/user";
-        return restTemplate.getForObject(url, User.class, paramMap);//这是服务间相互调用
+        //return restTemplate.getForObject(url, User.class, paramMap);//这是服务间相互调用
+        //这个我没有测试，实际使用为主
+        return this.restTemplate.exchange(url, HttpMethod.POST,
+                new HttpEntity<Object>(paramMap, this.myHeaders), User.class)
+                .getBody();
     }
 
     //getUserInfo 失败执行的方法

@@ -45,6 +45,15 @@ eureka:
 spring:
   application:
     name: demo-provider
+  #security:
+   # basic:
+    #  enabled: true # 启用SpringSecurity的安全配置项
+    #sessions: stateless
+    #user:
+     # name: admin  # 认证用户名
+      #password: admin # 认证密码
+      #role:        # 授权角色
+      #- USER
 
   #sleuth-zipkin
   zipkin:

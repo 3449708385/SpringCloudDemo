@@ -8,7 +8,8 @@ public interface IDemoApi {
      * 入参为字段，返回值为字段
      * 注意：
 
-     1）不支持@GetMapping @PostMapping，只能用@RequestMapping，通过method指定请求方式；
+     1）使用security 后就不支持@GetMapping @PostMapping，只能用@RequestMapping，
+        通过method指定请求方式（报错是IDemoApi bean无法注入，未指定请求类型post或get)；
 
      2）参数传递必须用@RequestParam(value = "test") 注解修饰；
 
@@ -22,6 +23,6 @@ public interface IDemoApi {
      * 入参为对象，返回值为对象
      */
     //@RequestMapping(value="/demo-api/user", method=RequestMethod.POST)
-    @PostMapping(value="/demo-api/user")
+    @RequestMapping(value="/demo-api/user", method = RequestMethod.POST)
     User user(@RequestBody User user);
 }
