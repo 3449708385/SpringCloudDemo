@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("userMapper")
 public interface UserMapper {
 
     // @Select("select * from sys_user"),舍弃这种方式

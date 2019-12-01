@@ -9,7 +9,9 @@ spring:
 #数据库配置
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    #因为com.mysql.cj.jdbc.Driver的引擎是在mysql-connector-java 6以上版本才改的
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test02?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=UTC
     username: root
     password: Alex2017!
@@ -119,28 +121,35 @@ feign:
     enabled: true
 
 ## tx-manager 配置
-tx-lcn:
-  client:
-    manager-address: 127.0.0.1:7970
+#tx-lcn:
+ # client:
+  #  manager-address: 127.0.0.1:7970
 #tx-manager ip(client请求ip)
-  manager:
-    host: 127.0.0.1
+  #manager:
+   # host: 127.0.0.1
 # client 请求端口
-    port: 8070
+   # port: 8070
 # 心跳检测时间 单位：ms
-    heart-time: 12000
+    #heart-time: 12000
 # 事务执行总时间
-    dtx-time: 10000
-    concurrent-level: 128
+    #dtx-time: 10000
+    #concurrent-level: 128
 # 参数延迟删除时间单位ms
-  message:
-    netty:
-      attr-delay-time: 10000
+  #message:
+   # netty:
+    #  attr-delay-time: 10000
 
 # 开启日志
-  logger:
-    enabled: true
-    driver-class-name: ${spring.datasource.driver-class-name}
-    jdbc-url: jdbc:mysql://localhost:3306/tx-manager?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: ${spring.datasource.username}
-    password: ${spring.datasource.password}
+  #logger:
+   # enabled: true
+    #driver-class-name: ${spring.datasource.driver-class-name}
+    #jdbc-url: jdbc:mysql://localhost:3306/tx_manager?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    #username: ${spring.datasource.username}
+    #password: ${spring.datasource.password}
+#lcn配置
+tx-lcn:
+  client:
+    manager-address: 127.0.0.1:8070
+  springcloud:
+    loadbalance:
+      enabled: true

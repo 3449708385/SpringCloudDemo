@@ -15,7 +15,7 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    @Autowired(required = false)@Qualifier("userMapper")
+    @Autowired
     private UserMapper userMapper;
 
     @Override

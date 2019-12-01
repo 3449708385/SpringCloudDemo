@@ -4,11 +4,9 @@ package com.mgp.provider.dao;
 import com.mgp.commons.bean.User;
 import com.mgp.commons.bean.UserExample;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("userMapper")
 public interface UserMapper {
 
     // @Select("select * from sys_user"),舍弃这种方式
@@ -31,9 +29,9 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+    int updateByExampleSelective( User record, UserExample example);
 
-    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+    int updateByExample(User record, UserExample example);
 
     int updateByPrimaryKeySelective(User record);
 

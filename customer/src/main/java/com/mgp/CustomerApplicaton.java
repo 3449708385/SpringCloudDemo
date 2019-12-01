@@ -1,6 +1,7 @@
 package com.mgp;
 
 import com.codingapi.txlcn.tc.config.EnableDistributedTransaction;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -22,9 +23,10 @@ import java.util.Base64;
 @EnableHystrix   //容错保护
 //LCN zhu
 @EnableDistributedTransaction
+@MapperScan(basePackages = "com.mgp.customer")
 public class CustomerApplicaton {
 
-    @Bean
+    /*@Bean
     public HttpHeaders myHeaders() { // 要进行一个Http头信息配置
         HttpHeaders headers = new HttpHeaders(); // 定义一个HTTP的头信息
         String auth = "admin:admin"; // 认证的原始信息
@@ -35,7 +37,7 @@ public class CustomerApplicaton {
         headers.set("Authorization", authHeader);
         return headers;
     }
-
+*/
 
     /**
      * @LoadBalanced 取出服务list，根据负载均衡算法分配服务

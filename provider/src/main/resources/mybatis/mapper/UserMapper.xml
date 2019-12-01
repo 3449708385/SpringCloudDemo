@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mgp.ddemo.user.dao.UserMapper">
+<mapper namespace="com.mgp.provider.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.mgp.commons.bean.User">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     id, username, nickname
   </sql>
-  <select id="selectByExample" parameterType="com.mgp.ddemo.user.bean.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.mgp.commons.bean.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -94,19 +94,19 @@
     delete from sys_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.mgp.ddemo.user.bean.UserExample">
+  <delete id="deleteByExample" parameterType="com.mgp.commons.bean.UserExample">
     delete from sys_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.mgp.ddemo.user.bean.User">
+  <insert id="insert" parameterType="com.mgp.commons.bean.User">
     insert into sys_user (id, username, nickname
       )
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.mgp.ddemo.user.bean.User">
+  <insert id="insertSelective" parameterType="com.mgp.commons.bean.User">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -131,7 +131,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mgp.ddemo.user.bean.UserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.mgp.commons.bean.UserExample" resultType="java.lang.Long">
     select count(*) from sys_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -163,7 +163,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mgp.ddemo.user.bean.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.mgp.commons.bean.User">
     update sys_user
     <set>
       <if test="username != null">
@@ -175,7 +175,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mgp.ddemo.user.bean.User">
+  <update id="updateByPrimaryKey" parameterType="com.mgp.commons.bean.User">
     update sys_user
     set username = #{username,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR}

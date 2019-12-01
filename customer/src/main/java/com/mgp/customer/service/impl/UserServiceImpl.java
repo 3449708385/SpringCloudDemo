@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired(required = false)@Qualifier("userMapper")
+    @Autowired
     private UserMapper userMapper;
 
     @Autowired
@@ -46,6 +46,9 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername("mm");
         user.setNickname("lcn");
+        //该项目插入
+        userMapper.insert(user);
+        //其他项目远程插入
         lcnService.insertData(user);
         return 0;
     }

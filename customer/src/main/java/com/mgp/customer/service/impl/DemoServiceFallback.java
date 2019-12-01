@@ -2,9 +2,9 @@ package com.mgp.customer.service.impl;
 
 import com.mgp.commons.bean.User;
 import com.mgp.customer.service.DemoFeignService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service("demoFeignService")
 public class DemoServiceFallback implements DemoFeignService {
     @Override
     public String test(String test) {
