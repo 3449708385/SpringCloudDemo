@@ -16,6 +16,12 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 
+
+/*
+
+  用于测试ribbon方式的熔断
+
+ */
 @Service("demoApiService")
 public class DemoApiServiceImpl implements DemoApiService {
 

@@ -3,6 +3,9 @@ package com.mgp.api.service;
 import com.mgp.commons.bean.User;
 import org.springframework.web.bind.annotation.*;
 
+/*
+  跨服务接口定义处
+ */
 public interface IDemoApi {
     /**
      * 入参为字段，返回值为字段

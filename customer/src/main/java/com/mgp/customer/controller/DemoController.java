@@ -2,6 +2,8 @@ package com.mgp.customer.controller;
 
 import com.mgp.commons.bean.User;
 import com.mgp.customer.service.DemoFeignService;
+import com.mgp.customer.service.LcnService;
+import com.mgp.customer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,10 @@ public class DemoController {
      */
     @Autowired(required = false)@Qualifier("demoFeignService")
     public DemoFeignService demoFeignService;
+
+    @Autowired
+    public UserService userService;
+
     /**
      * rest http 调用方式
      */
@@ -39,5 +45,11 @@ public class DemoController {
         user.setId(10L);
         user.setUsername("Joab-Y");
         return demoFeignService.user(user);
+    }
+
+    @RequestMapping("/lcnTran")
+    public String lcnTran(){
+        userService.lcnTest();
+        return "lcn";
     }
 }

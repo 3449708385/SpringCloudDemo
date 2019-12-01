@@ -1,12 +1,15 @@
 package com.mgp;
 
 
+import com.codingapi.txlcn.tc.config.EnableDistributedTransaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 @EnableEurekaClient
+//LCN 客户端注解
+@EnableDistributedTransaction
 public class ProviderApplication {
 
     /**

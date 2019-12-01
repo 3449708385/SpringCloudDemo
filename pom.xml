@@ -21,6 +21,7 @@
         <module>sleuth-zipkin</module>
         <module>turbine</module>
         <module>archaius</module>
+        <module>txlcn</module>
     </modules>
 
 </project>

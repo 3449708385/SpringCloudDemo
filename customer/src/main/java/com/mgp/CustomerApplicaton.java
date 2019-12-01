@@ -1,5 +1,6 @@
 package com.mgp;
 
+import com.codingapi.txlcn.tc.config.EnableDistributedTransaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -19,6 +20,8 @@ import java.util.Base64;
 //@EnableDiscoveryClient
 @EnableFeignClients(basePackages = "com.mgp.customer.service")
 @EnableHystrix   //容错保护
+//LCN zhu
+@EnableDistributedTransaction
 public class CustomerApplicaton {
 
     @Bean
