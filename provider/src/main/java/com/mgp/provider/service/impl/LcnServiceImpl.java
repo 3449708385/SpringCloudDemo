@@ -15,8 +15,11 @@ public class LcnServiceImpl implements LcnService {
     @Autowired
     public UserService userService;
 
-    @Transactional
-    @LcnTransaction(propagation = DTXPropagation.SUPPORTS) //分布式事务注解
+    //@LcnTransaction(propagation = DTXPropagation.REQUIRED) //分布式事务注解
+    //@LcnTransaction
+    //@Transactional
+    //@LcnTransaction(propagation=DTXPropagation.SUPPORTS)
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public int insertSigleUser(User user) {
         user.setNickname("lcn2");

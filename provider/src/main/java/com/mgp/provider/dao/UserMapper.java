@@ -3,7 +3,6 @@ package com.mgp.provider.dao;
 
 import com.mgp.commons.bean.User;
 import com.mgp.commons.bean.UserExample;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

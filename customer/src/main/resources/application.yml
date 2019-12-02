@@ -71,11 +71,10 @@ mybatis:
       #  max-redirects: 10
        # nodes: 127.0.0.1:6080
 # 连接超时时间（毫秒）
-
 logging:
   level:
-     com.mgp.ddemo.*.mapper : debug
-     com.codingapi: debug
+    com.mgp.customer.*.mapper : debug
+    com.codingapi: debug
 
   #sleuth-zipkin
   zipkin:

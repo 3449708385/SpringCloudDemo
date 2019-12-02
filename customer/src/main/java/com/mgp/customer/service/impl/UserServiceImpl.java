@@ -39,9 +39,10 @@ public class UserServiceImpl implements UserService {
         userMapper.insert(user);
     }
 
+    //@LcnTransaction(propagation= DTXPropagation.REQUIRED)
     @Override
-    @Transactional
     @LcnTransaction(propagation= DTXPropagation.REQUIRED)
+    @Transactional(rollbackFor = Exception.class)
     public int lcnTest() {
         User user = new User();
         user.setUsername("mm");

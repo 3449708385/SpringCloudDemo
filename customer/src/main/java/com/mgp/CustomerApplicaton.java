@@ -23,7 +23,7 @@ import java.util.Base64;
 @EnableHystrix   //容错保护
 //LCN zhu
 @EnableDistributedTransaction
-@MapperScan(basePackages = "com.mgp.customer")
+@MapperScan(basePackages = "com.mgp.*.dao")
 public class CustomerApplicaton {
 
     /*@Bean

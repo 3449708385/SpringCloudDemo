@@ -1,3 +1,4 @@
+/*
 package com.mgp.commons.util.config;
 
 import org.springframework.context.annotation.Bean;
@@ -12,9 +13,11 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 import javax.annotation.Resource;
 
+*/
 /**
  * 用于取代security配置文件的配置信息
- */
+ *//*
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -40,3 +43,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+*/

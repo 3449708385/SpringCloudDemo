@@ -101,10 +101,8 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mgp.commons.bean.User">
-    insert into sys_user (id, username, nickname
-      )
-    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}
-      )
+    insert into sys_user (id, username, nickname)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mgp.commons.bean.User">
     insert into sys_user

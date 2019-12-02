@@ -9,7 +9,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 @EnableEurekaClient
-@MapperScan(basePackages = "com.mgp.provider")
+@MapperScan(basePackages = "com.mgp.*.dao")
 //LCN 客户端注解
 @EnableDistributedTransaction
 public class ProviderApplication {

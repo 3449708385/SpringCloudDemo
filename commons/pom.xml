@@ -22,10 +22,10 @@
 
     <dependencies>
         <!-- 界面访问或接口访问安全认证 -->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- 界面访问或接口访问安全认证 final -->
         <!-- 这个包加入将会导致feign service注入失败，但可以在启动类上添加扫描类信息解决 -->
         <dependency>
