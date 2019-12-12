@@ -152,3 +152,9 @@ tx-lcn:
   springcloud:
     loadbalance:
       enabled: true
+
+# e-job
+regCenter:
+  serverList: 192.168.1.4:2181
+  namespace: ejob01
+
