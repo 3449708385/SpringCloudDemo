@@ -22,6 +22,7 @@
         <module>turbine</module>
         <module>archaius</module>
         <module>txlcn</module>
+        <module>lcnservertest</module>
     </modules>
 
 </project>
