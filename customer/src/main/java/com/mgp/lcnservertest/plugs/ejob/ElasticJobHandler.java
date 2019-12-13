@@ -1,4 +1,4 @@
-package com.mgp.plugs.ejob;
+package com.mgp.lcnservertest.plugs.ejob;
 
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 import com.dangdang.ddframe.job.config.JobCoreConfiguration;
@@ -59,7 +59,8 @@ public class ElasticJobHandler {
         //失效转移
         //failover：是否开启任务执行失效转移，开启表示如果作业在一次任务执行中途宕机，允许将该次未完成的任务在另一作业节点上补偿执行
         //错过补偿
-        //misfire: 是否开启错过任务重新执行
+        //misfire: 是否开启错过任务重新执行，默认开启（因为上一次任务没有执行完，导致的定时任务没有触发，
+        // 一般与monitorExecution幂等性-代码控制联用，默认开启），无法处理服务器宕机的情况，因为宕机导致的定时任务未运行代码自行处理，频繁的任务没效果，比如每20s等
 
         return LiteJobConfiguration.newBuilder(new SimpleJobConfiguration(JobCoreConfiguration.newBuilder(jobClass.getName(), cron, shardingTotalCount)
                         .shardingItemParameters(shardingItemParameters).jobParameter(jobParameters).failover(true).misfire(true).build(),
@@ -121,6 +122,7 @@ public class ElasticJobHandler {
         LiteJobConfiguration jobConfig = null;
 
         //根据scriptCommandLine有没有参数值判断是那种类型的任务
+        //这个对象不适合太频繁的定时，最好是用于一天一次这种的
         if("simple".equals(jobType)) {
 
             jobConfig = getSimpleLiteJobConfiguration(simpleJob.getClass(), cron, shardingTotalCount,

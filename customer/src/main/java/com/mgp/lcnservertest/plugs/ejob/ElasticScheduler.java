@@ -1,4 +1,4 @@
-package com.mgp.plugs.ejob;
+package com.mgp.lcnservertest.plugs.ejob;
 
 import org.springframework.stereotype.Component;
 

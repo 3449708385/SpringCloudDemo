@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8119
   #servlet:
    # context-path: /demo-customer  #默认没有项目名，你可以加
 spring:
