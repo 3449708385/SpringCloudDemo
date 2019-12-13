@@ -1,5 +1,7 @@
 package com.mgp.lcnservertest.plugs.ejob;
 
+import com.dangdang.ddframe.job.api.dataflow.DataflowJob;
+import com.dangdang.ddframe.job.api.script.ScriptJob;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
@@ -57,7 +59,25 @@ public class ElasticSchedulerAspect implements ApplicationContextAware, Initiali
         String scriptCommandLine = elasticScheduler.scriptCommandLine();
         String jobType = elasticScheduler.jobType();
         try {
-            elasticJobHandler.addJob((SimpleJob) bean,cron,shardingTotalCount,shardingItemParameters,jobParamters, description, scriptCommandLine, jobType);
+            //根据scriptCommandLine有没有参数值判断是那种类型的任务
+            //这个对象不适合太频繁的定时，最好是用于一天一次这种的
+            if("simple".equals(jobType)) {
+
+                elasticJobHandler.addSimpleJob((SimpleJob) bean,cron,shardingTotalCount,shardingItemParameters,jobParamters, description, scriptCommandLine, jobType);
+
+            }else if("dataFlow".equals(jobType)){
+
+                elasticJobHandler.addDataflowJob((DataflowJob) bean,cron,shardingTotalCount,shardingItemParameters,jobParamters, description, scriptCommandLine, jobType);
+
+            }else if("script".equals(jobType)){
+
+                elasticJobHandler.addScriptJob((ScriptJob) bean,cron,shardingTotalCount,shardingItemParameters,jobParamters, description, scriptCommandLine, jobType);
+
+            }else{
+
+                elasticJobHandler.addSimpleJob((SimpleJob) bean,cron,shardingTotalCount,shardingItemParameters,jobParamters, description, scriptCommandLine, jobType);
+
+            }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
