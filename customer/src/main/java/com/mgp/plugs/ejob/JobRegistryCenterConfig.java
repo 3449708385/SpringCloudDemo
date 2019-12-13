@@ -1,4 +1,4 @@
-package com.mgp.lcnservertest.plugs.ejob;
+package com.mgp.plugs.ejob;
 
 import com.dangdang.ddframe.job.event.JobEventConfiguration;
 import com.dangdang.ddframe.job.event.rdb.JobEventRdbConfiguration;

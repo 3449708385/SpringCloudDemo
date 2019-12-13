@@ -1,7 +1,5 @@
-package com.mgp.lcnservertest.plugs.ejob;
+package com.mgp.plugs.ejob;
 
-import com.dangdang.ddframe.job.api.dataflow.DataflowJob;
-import com.dangdang.ddframe.job.api.script.ScriptJob;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 import com.dangdang.ddframe.job.config.JobCoreConfiguration;
 import com.dangdang.ddframe.job.config.dataflow.DataflowJobConfiguration;
@@ -61,8 +59,7 @@ public class ElasticJobHandler {
         //失效转移
         //failover：是否开启任务执行失效转移，开启表示如果作业在一次任务执行中途宕机，允许将该次未完成的任务在另一作业节点上补偿执行
         //错过补偿
-        //misfire: 是否开启错过任务重新执行，默认开启（因为上一次任务没有执行完，导致的定时任务没有触发，
-        // 一般与monitorExecution幂等性-代码控制联用，默认开启），无法处理服务器宕机的情况，因为宕机导致的定时任务未运行代码自行处理，频繁的任务没效果，比如每20s等
+        //misfire: 是否开启错过任务重新执行
 
         return LiteJobConfiguration.newBuilder(new SimpleJobConfiguration(JobCoreConfiguration.newBuilder(jobClass.getName(), cron, shardingTotalCount)
                         .shardingItemParameters(shardingItemParameters).jobParameter(jobParameters).failover(true).misfire(true).build(),
@@ -73,7 +70,7 @@ public class ElasticJobHandler {
     /**
      * @Description script任務配置類
      */
-    private LiteJobConfiguration getScriptLiteJobConfiguration(final Class<? extends ScriptJob> jobClass,
+    private LiteJobConfiguration getScriptLiteJobConfiguration(final Class<? extends SimpleJob> jobClass,
                                                          final String cron,
                                                          final int shardingTotalCount,
                                                          final String shardingItemParameters,
@@ -87,10 +84,9 @@ public class ElasticJobHandler {
     }
 
     /**
-     * @Description dataFlow任務配置類,streamingProcess：true 代表开启流式作业，默认false，
-     * 一般用这个模式都是要开启流式的，不然用simple就行
+     * @Description dataFlow任務配置類
      */
-    private LiteJobConfiguration getDataFlowLiteJobConfiguration(final Class<? extends DataflowJob> jobClass,
+    private LiteJobConfiguration getDataFlowLiteJobConfiguration(final Class<? extends SimpleJob> jobClass,
                                                                final String cron,
                                                                final int shardingTotalCount,
                                                                final String shardingItemParameters,
@@ -104,7 +100,7 @@ public class ElasticJobHandler {
     }
 
     /**
-     * 抽象添加SimpleJob方法
+     * 抽象添加job方法
      * @param simpleJob
      * @param cron
      * @param shardingTotalCount
@@ -112,72 +108,40 @@ public class ElasticJobHandler {
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    public void addSimpleJob(final SimpleJob simpleJob,
-                             final String cron,
-                             final Integer shardingTotalCount,
-                             final String shardingItemParameters,
-                             final String jobParameters,
-                             final String description,
-                             final String scriptCommandLine,
-                             final String jobType)
+    public void addJob(final SimpleJob simpleJob,
+                       final String cron,
+                       final Integer shardingTotalCount,
+                       final String shardingItemParameters,
+                       final String jobParameters,
+                       final String description,
+                       final String scriptCommandLine,
+                       final String jobType)
             throws IllegalAccessException, InstantiationException {
 
+        LiteJobConfiguration jobConfig = null;
+
         //根据scriptCommandLine有没有参数值判断是那种类型的任务
-        //这个对象不适合太频繁的定时，最好是用于一天一次这种的
-        LiteJobConfiguration jobConfig = getSimpleLiteJobConfiguration(simpleJob.getClass(), cron, shardingTotalCount,
+        if("simple".equals(jobType)) {
+
+            jobConfig = getSimpleLiteJobConfiguration(simpleJob.getClass(), cron, shardingTotalCount,
                     shardingItemParameters, jobParameters, description, scriptCommandLine);
+
+        }else if("dataFlow".equals(jobType)){
+
+            jobConfig = getDataFlowLiteJobConfiguration(simpleJob.getClass(), cron, shardingTotalCount,
+                    shardingItemParameters, jobParameters, description, scriptCommandLine);
+
+        }else if("script".equals(jobType)){
+
+            jobConfig = getScriptLiteJobConfiguration(simpleJob.getClass(), cron, shardingTotalCount,
+                    shardingItemParameters, jobParameters, description, scriptCommandLine);
+
+        }else{
+
+            jobConfig = getSimpleLiteJobConfiguration(simpleJob.getClass(), cron, shardingTotalCount,
+                    shardingItemParameters, jobParameters, description, scriptCommandLine);
+
+        }
         new SpringJobScheduler(simpleJob, regCenter, jobConfig, jobEventConfiguration, elasticJobListener).init();
-    }
-
-    /**
-     * 抽象添加 DataflowJob 方法
-     * @param DataflowJob
-     * @param cron
-     * @param shardingTotalCount
-     * @param shardingItemParameters
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
-    public void addDataflowJob(final DataflowJob dataflowJob,
-                             final String cron,
-                             final Integer shardingTotalCount,
-                             final String shardingItemParameters,
-                             final String jobParameters,
-                             final String description,
-                             final String scriptCommandLine,
-                             final String jobType)
-            throws IllegalAccessException, InstantiationException {
-
-        //根据scriptCommandLine有没有参数值判断是那种类型的任务
-        //这个对象不适合太频繁的定时，最好是用于一天一次这种的
-        LiteJobConfiguration jobConfig = getDataFlowLiteJobConfiguration(dataflowJob.getClass(), cron, shardingTotalCount,
-                    shardingItemParameters, jobParameters, description, scriptCommandLine);
-        new SpringJobScheduler(dataflowJob, regCenter, jobConfig, jobEventConfiguration, elasticJobListener).init();
-    }
-
-    /**
-     * 抽象添加 ScriptJob 方法
-     * @param ScriptJob
-     * @param cron
-     * @param shardingTotalCount
-     * @param shardingItemParameters
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
-    public void addScriptJob(final ScriptJob scriptJob,
-                               final String cron,
-                               final Integer shardingTotalCount,
-                               final String shardingItemParameters,
-                               final String jobParameters,
-                               final String description,
-                               final String scriptCommandLine,
-                               final String jobType)
-            throws IllegalAccessException, InstantiationException {
-
-        //根据scriptCommandLine有没有参数值判断是那种类型的任务
-        //这个对象不适合太频繁的定时，最好是用于一天一次这种的
-        LiteJobConfiguration jobConfig = getScriptLiteJobConfiguration(scriptJob.getClass(), cron, shardingTotalCount,
-                shardingItemParameters, jobParameters, description, scriptCommandLine);
-        new SpringJobScheduler(scriptJob, regCenter, jobConfig, jobEventConfiguration, elasticJobListener).init();
     }
 }

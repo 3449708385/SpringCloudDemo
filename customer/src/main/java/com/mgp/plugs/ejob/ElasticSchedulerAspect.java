@@ -1,4 +1,4 @@
-package com.mgp.lcnservertest.plugs.ejob;
+package com.mgp.plugs.ejob;
 
 import com.dangdang.ddframe.job.api.dataflow.DataflowJob;
 import com.dangdang.ddframe.job.api.script.ScriptJob;
