@@ -1,4 +1,4 @@
-package com.mgp.lcnservertest.plugs.ejob;
+package com.mgp.plugs.ejob;
 
 import org.springframework.stereotype.Component;
 
@@ -50,4 +50,10 @@ public @interface ElasticScheduler {
      * 任务参数
      */
     String jobParameters() default "";
+
+    //script命令文件路径：scriptCommandLine: "d:/run.bat"
+    String scriptCommandLine() default "";
+
+    //设置定时类型simple, dataFlow, script
+    String jobType() default "simple";
 }

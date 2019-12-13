@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+//执行定时的监听，AbstractDistributeOnceElasticJobListener 是分布式下单节点执行的监听
+//ElasticJobListener是全部节点执行的监听
+//参考：http://elasticjob.io/docs/elastic-job-lite/02-guide/job-listener/
 public class MyElasticJobListener implements ElasticJobListener {
     private static final Logger logger = LoggerFactory.getLogger(MyElasticJobListener.class);
 

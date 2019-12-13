@@ -1,4 +1,4 @@
-package com.mgp.lcnservertest.plugs.ejob;
+package com.mgp.plugs.ejob;
 
 
 import com.dangdang.ddframe.job.api.ShardingContext;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
  * @date : 2019/7/17 17:18
  */
 @Component
-@ElasticScheduler(cron = "0/20 * * * * ?",shardingTotalCount = 4, name = "simpleJob task",
-        shardingItemParameters = "0=0,1=0,2=1,3=1",jobParameters = "parameter")
+@ElasticScheduler(cron = "0/20 * * * * ?",shardingTotalCount = 4, name = "simpleJobTask",
+        shardingItemParameters = "0=a,1=b,2=c,3=d",jobParameters = "a", jobType = "simple")
 public class StockSimpleJob implements SimpleJob {
     @Override
     public void execute(ShardingContext shardingContext) {
@@ -27,7 +27,22 @@ public class StockSimpleJob implements SimpleJob {
                 shardingContext.getJobName(),
                 shardingContext.getJobParameter()
 
-        ));*/
-        System.out.println("simpleJob 线程开始执行");
+        ));
+        System.out.println("simpleJob 线程开始执行");*/
+
+       switch(shardingContext.getShardingItem()){
+          case 0:
+              System.out.println(shardingContext.getShardingParameter());
+              break;
+          case 1:
+              System.out.println(shardingContext.getShardingParameter());
+              break;
+          case 2:
+              System.out.println(shardingContext.getShardingParameter());
+              break;
+          default:
+              System.out.println(shardingContext.getShardingParameter());
+              break;
+       }
     }
 }

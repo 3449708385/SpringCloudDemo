@@ -54,8 +54,10 @@ public class ElasticSchedulerAspect implements ApplicationContextAware, Initiali
         String shardingItemParameters = elasticScheduler.shardingItemParameters();
         Integer shardingTotalCount = elasticScheduler.shardingTotalCount();
         String jobParamters = elasticScheduler.jobParameters();
+        String scriptCommandLine = elasticScheduler.scriptCommandLine();
+        String jobType = elasticScheduler.jobType();
         try {
-            elasticJobHandler.addJob((SimpleJob) bean,cron,shardingTotalCount,shardingItemParameters,jobParamters);
+            elasticJobHandler.addJob((SimpleJob) bean,cron,shardingTotalCount,shardingItemParameters,jobParamters, description, scriptCommandLine, jobType);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
