@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  * 注意：不同项目相同包名+类名，后启动的项目不会执行定时
  */
 @Component
-/*@ElasticScheduler(cron = "0/20 * * * * ?",shardingTotalCount = 4, name = "simpleJobTask",
-        shardingItemParameters = "0=a,1=b,2=c,3=d",jobParameters = "a", jobType = "simple")*/
+@ElasticScheduler(cron = "0/20 * * * * ?",shardingTotalCount = 4, name = "simpleJobTask",
+        shardingItemParameters = "0=a,1=b,2=c,3=d",jobParameters = "a", jobType = "simple")
 public class StockSimpleJob implements SimpleJob {
     @Override
     public void execute(ShardingContext shardingContext) {

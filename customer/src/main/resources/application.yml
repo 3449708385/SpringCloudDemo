@@ -164,6 +164,8 @@ feign:
 #lcn配置
 tx-lcn:
   client:
+# TM事务消息端口,manager-address：127.0.0.1:8070 这个客户端地址是默认地址，配置成别的好像没用，这个不上公网，用这个也没有问题
+    #manager-address: 127.0.0.1:8037,127.0.0.1:8070
     manager-address: 127.0.0.1:8070
   springcloud:
     loadbalance:
