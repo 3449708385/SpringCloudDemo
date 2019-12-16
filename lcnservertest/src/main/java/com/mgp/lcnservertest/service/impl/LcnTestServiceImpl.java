@@ -23,7 +23,7 @@ public class LcnTestServiceImpl implements LcnTestService {
         LcnTest lcnTest = new LcnTest();
         lcnTest.setAccressId("lcn01");
         lcnTest.setLcnName("test01");
-        int i=1/0;
+        //int i=1/0;
         lcnTestMapper.insert(lcnTest);
         return 0;
     }
