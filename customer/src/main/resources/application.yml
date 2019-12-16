@@ -121,10 +121,10 @@ feign:
   client:
     config:
       default:
-        connect-timeout: 10000
+        connect-timeout: 20000
         read-timeout: 20000
     lcn-server-test:
-        connect-timeout: 5000
+        connect-timeout: 20000
         read-timeout: 20000
 
 ###设置feign客户端超时时间,记得在调用方接口上加@LoadBalanced, 这是另一种方式
